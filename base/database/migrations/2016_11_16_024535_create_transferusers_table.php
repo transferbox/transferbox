@@ -18,15 +18,16 @@ class CreateTransferusersTable extends Migration
             $table->string('ftp_username', 32)->unique();
             $table->string('ftp_password', 64);
             $table->string('ftp_quota', 32)->nullable();
-            $table->string('ftp_dir')->nullable();
+            $table->string('ftp_dir');
             $table->string('ftp_ipaccess', 15)->nullable();
-            $table->string('tb_title')->nullable();
-            $table->string('tb_name')->nullable();
-            $table->string('tb_email')->nullable();
+            $table->string('tb_title');
+            $table->string('tb_name');
+            $table->string('tb_email');
             $table->text('tb_comment')->nullable();
-            $table->timestamp('tb_regdate')->nullable();
-            $table->date('tb_expdate')->nullable();
-            $table->enum('tb_status', ['0', '1']);
+            $table->datetime('tb_regdate');
+            $table->datetime('tb_expdate');
+            $table->integer('tb_status');
+            $table->string('tb_uuid', 36)->unique();
             $table->timestamps();
         });
     }

@@ -28,4 +28,4 @@ function randomStringGen($length=9, $strength=4) {
   }
   return $randStringReturn;
 }
- ?>
+?>

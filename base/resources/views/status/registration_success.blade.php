@@ -68,7 +68,7 @@
         <div class="flex-center position-ref full-height">
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    The registration was successful. <br \>An email have been sent to {{ session('email') }}
                 </div>
             </div>
         </div>
