@@ -65,7 +65,7 @@ class RegistrationController extends Controller
 
       $transferUser = new Transferusers;
       $transferUser->ftp_username     = $username;
-      $transferUser->ftp_password     = $password;
+      $transferUser->ftp_password     = md5($password);
       $transferUser->ftp_quota        = 0;
       $transferUser->ftp_dir          = "/opt/transferbox/data/$username";
       $transferUser->ftp_ipaccess     = "*";
