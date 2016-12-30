@@ -56,7 +56,7 @@ class WorkerAccounts extends Command
 
       foreach ($transferUser as $user) {
         $updateUser = Transferusers::where('tb_uuid', $user->tb_uuid)->first();
-        $updateUser->tb_status = 1;
+        $updateUser->tb_status = 0;
         $updateUser->save();
 
         $emailData['ftp_username']              = $user->ftp_username;
