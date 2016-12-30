@@ -15,6 +15,11 @@ Route::get('/', 'RegistrationController@index');
 Route::get('/registration_success', 'RegistrationController@success');
 Route::resource('registration', 'RegistrationController');
 
+Route::get('/errormessage', function()
+{
+    return View::make('errors/custom');
+});
+
 Route::get('/account/extend/{userUuid}', 'AccountActionsController@extend');
 Route::get('/account/delete/{userUuid}', 'AccountActionsController@delete');
 
