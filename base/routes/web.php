@@ -20,6 +20,7 @@ Route::get('/errormessage', function()
     return View::make('errors/custom');
 });
 
+Route::get('/account/resend/{userUuid}', 'AccountActionsController@resend');
 Route::get('/account/extend/{userUuid}', 'AccountActionsController@extend');
 Route::get('/account/delete/{userUuid}', 'AccountActionsController@delete');
 
