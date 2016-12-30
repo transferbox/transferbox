@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use View;
 use App\Transferusers;
+use App\Systemstatus;
 use Carbon\Carbon;
 use Session;
 Use File;
@@ -34,8 +35,10 @@ class DashboardController extends Controller
       $freeSpace = "N/A";
     }
 
-    return View::make('admin/dashboard', ['activeaccounts' => $activeAccounts, 'freespace' => $freeSpace]);
-  }
+    $systemStatus      = Systemstatus::orderby('created_at', 'desc')->first();
+    $systemStatusMore  = Systemstatus::limit(60)->get();
 
+    return View::make('admin/dashboard', ['activeaccounts' => $activeAccounts, 'systemstatus' => $systemStatus, 'systemstatusmore' => $systemStatusMore]);
+  }
 }
 ?>

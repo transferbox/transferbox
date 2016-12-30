@@ -232,6 +232,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Uuid' => Webpatser\Uuid\Uuid::class,
+        'Carbon' => 'Carbon\Carbon',
 
     ],
 
