@@ -51,10 +51,12 @@
           {{ Form::submit('Create account and send me an email', array('class' => 'btn btn-primary pull-left')) }}
         </div>
         {!! Form::close() !!}
+        <!--
         <ul class="social list-inline">
           <li><a href="#">User Manual</a></li>
           <li><a href="#">transferbox.io</a></li>
         </ul>
+        -->
       </div>
     </div>
   </div>
