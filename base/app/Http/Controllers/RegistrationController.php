@@ -48,10 +48,10 @@ class RegistrationController extends Controller
       ->withErrors($validator);
     } else {
 
-      $usernameLength   = Configuration::where('parameter', 'usernamelength')->value('value');
+      $usernameLength   = Configuration::where('parameter', 'usernamelength')->value('value');    // Length of username
       $passwordStrength = Configuration::where('parameter', 'passwordstrength')->value('value');; // Set to 1, 2, 4 or 8.
-      $passwordLength   = Configuration::where('parameter', 'passwordlength')->value('value');; // Set between 1 and 20.
-      $accountLifetime  = Configuration::where('parameter', 'accountlifetime')->value('value');; // Days account is allowed to be active
+      $passwordLength   = Configuration::where('parameter', 'passwordlength')->value('value');;   // Set between 1 and 20.
+      $accountLifetime  = Configuration::where('parameter', 'accountlifetime')->value('value');;  // Days account is allowed to be active
 
       $username = randomStringGen($usernameLength, "0");
       $password = randomStringGen($passwordLength, $passwordStrength);
@@ -80,16 +80,19 @@ class RegistrationController extends Controller
       $transferUser->save();
 
       $emailData = array();
-      $emailData['ftp_username']              = $username;
-      $emailData['ftp_password']              = $password;
-      $emailData['tb_title']                  = Input::get('title');
-      $emailData['tb_expdate']                = $expireDate;
-      $emailData['tb_uuid']                   = $newUuid;
-      $emailData['tmpl_systemftphostname']    = Configuration::where('parameter', 'systemftphostname')->value('value');
-      $emailData['tmpl_emailtemplatetitle']   = Configuration::where('parameter', 'emailtemplatetitle')->value('value');
-      $emailData['tmpl_emailpoweredby']       = Configuration::where('parameter', 'emailpoweredby')->value('value');
-      $emailData['tmpl_emailpoweredbylink']   = Configuration::where('parameter', 'emailpoweredbylink')->value('value');
+      $emailData['ftp_username']                = $username;
+      $emailData['ftp_password']                = $password;
+      $emailData['tb_title']                    = Input::get('title');
+      $emailData['tb_expdate']                  = $expireDate;
+      $emailData['tb_uuid']                     = $newUuid;
+      $emailData['tmpl_systemftphostname']      = Configuration::where('parameter', 'systemftphostname')->value('value');
+      $emailData['tmpl_emailtemplatetitle']     = Configuration::where('parameter', 'emailtemplatetitle')->value('value');
+      $emailData['tmpl_emailpoweredby']         = Configuration::where('parameter', 'emailpoweredby')->value('value');
+      $emailData['tmpl_emailpoweredbylink']     = Configuration::where('parameter', 'emailpoweredbylink')->value('value');
+      $emailData['tmpl_accountlifetime']        = Configuration::where('parameter', 'accountlifetime')->value('value');
+      $emailData['tmpl_accountlifetimerenewal'] = Configuration::where('parameter', 'accountlifetimerenewal')->value('value');
 
+      $emailConfig = array();
       $emailConfig['emailfrom']                         = Configuration::where('parameter', 'emailfrom')->value('value');
       $emailConfig['emailfromaddress']                  = Configuration::where('parameter', 'emailfromaddress')->value('value');
       $emailConfig['emailsubjectnewaccount']            = Configuration::where('parameter', 'emailsubjectnewaccount')->value('value');

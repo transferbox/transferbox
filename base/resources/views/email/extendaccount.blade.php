@@ -257,52 +257,20 @@
                     <tr>
                       <td>
                         <h2>{{ $emailData['tmpl_emailtemplatetitle'] }}</h2>
-                        <p>Your FTP account have been created.</p>
-                        <p>This account will be active for {{ $emailData['tmpl_accountlifetime'] }} days. You can extend the account for another {{ $emailData['tmpl_accountlifetimerenewal'] }} days if you need the account longer.
-                        <p>You can only extend the account in the last 10 days before it expires. You will get a notification warning 10 days before the account is deleted.</p>
-                        <p>You can also delete the account if there is no need for it anymore.</p>
+                        <p>The account have been extended for additional {{ $emailData['tmpl_accountlifetimerenewal'] }} days. </p>
                         <table cellpadding="0" cellspacing="0" border="0">
                           <tr>
                             <td width="140" valign="top"><strong>Account Title</strong></td>
                             <td width="200" valign="top">{{ $emailData['tb_title'] }}</td>
                           </tr>
                           <tr>
-                            <td width="140" valign="top"><strong>Removal Date</strong></td>
+                            <td width="140" valign="top"><strong>New Removal Date</strong></td>
                             <td width="200" valign="top">{{ $emailData['tb_expdate'] }}</td>
                           </tr>
                           <tr>
                             <td width="140" valign="top"><strong>Username</strong></td>
                             <td width="200" valign="top">{{ $emailData['ftp_username'] }}</td>
                           </tr>
-                          <tr>
-                            <td valign="top"><strong>Password</strong></td>
-                            <td valign="top">{{ $emailData['ftp_password'] }}</td>
-                          </tr>
-                          <tr>
-                            <td valign="top"><strong>IP / Server</strong></td>
-                            <td valign="top">{{ $emailData['tmpl_systemftphostname'] }}</td>
-                          </tr>
-                          <tr>
-                            <td valign="top"><strong>Explorer Link</strong></td>
-                            <td valign="top"><a href="ftp://{{ $emailData['ftp_username'] }}:{{ $emailData['ftp_password'] }}{{ urldecode('%40') }}{{ $emailData['tmpl_systemftphostname'] }}" target ="_blank" title="FTP Link" style="color: green; text-decoration: none;">ftp://{{ $emailData['ftp_username'] }}:{{ $emailData['ftp_password'] }}{{ urldecode('%40') }}{{ $emailData['tmpl_systemftphostname'] }}</a></td>
-                          </tr>
-                        </table>
-                        <br />
-                        <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
-                          <tbody>
-                            <tr>
-                              <td align="left">
-                                <table border="0" cellpadding="0" cellspacing="5">
-                                  <tbody>
-                                    <tr>
-                                      <td> <a href="{{ url('/account/extend') }}/{{ $emailData['tb_uuid'] }}" target="_blank">Extend account (30 days)</a> </td>
-                                      <td> <a href="{{ url('/account/delete') }}/{{ $emailData['tb_uuid'] }}" target="_blank">Delete account</a> </td>
-                                    </tr>
-                                  </tbody>
-                                </table>
-                              </td>
-                            </tr>
-                          </tbody>
                         </table>
                       </td>
                     </tr>
@@ -318,7 +286,7 @@
               <table border="0" cellpadding="0" cellspacing="0">
                 <tr>
                   <td class="content-block powered-by">
-                    Powered by <a href="https://transferbox.io">TransferBox</a>.
+                    Powered by <a href="{{ $emailData['tmpl_emailpoweredbylink'] }}">{{ $emailData['tmpl_emailpoweredby'] }}</a>.
                   </td>
                 </tr>
               </table>

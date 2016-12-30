@@ -48,12 +48,17 @@ class ConfigurationSeeder extends Seeder
 
       DB::table('configurations')->insert([
           'parameter' => 'emailsubjectnewaccount',
-          'value'     => 'FTP Account Information',
+          'value'     => 'Transfer Account Information',
       ]);
 
       DB::table('configurations')->insert([
           'parameter' => 'emailsubjectnewaccountinformation',
-          'value'     => 'New FTP Account (Do not forward)',
+          'value'     => 'New transfer account (Do not forward)',
+      ]);
+
+      DB::table('configurations')->insert([
+          'parameter' => 'emailsubjectextendedaccount',
+          'value'     => 'Account have been extended',
       ]);
 
       DB::table('configurations')->insert([
