@@ -42,7 +42,7 @@ class AccountActionsController extends Controller
     }
     elseif($expireDate->diffInDays($nowDate) > 10)
     {
-      $errorMessage = $expireDate->diffInDays($nowDate) . "You cannot extend this account yet.<p>You can extend in " . $expireDate->subDays(10)->diffForHumans() . "</p>";
+      $errorMessage = "You cannot extend this account yet.<p>You can extend in " . $expireDate->subDays(10)->diffForHumans() . "</p>";
       Session::flash('message', $errorMessage);
       return Redirect::to('errormessage');
     }
