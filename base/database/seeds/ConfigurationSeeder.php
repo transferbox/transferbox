@@ -63,7 +63,7 @@ class ConfigurationSeeder extends Seeder
 
       DB::table('configurations')->insert([
           'parameter' => 'emailtemplatetitle',
-          'value'     => 'Transferbox FTP account!',
+          'value'     => 'Transferbox FTP account',
       ]);
 
       DB::table('configurations')->insert([
