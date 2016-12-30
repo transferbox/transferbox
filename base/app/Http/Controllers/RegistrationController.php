@@ -6,11 +6,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Mail;
 use View;
 use App\Transferusers;
+use App\Configuration;
 use Carbon\Carbon;
 use Session;
 use Uuid;
+use App\Mail\NewAccount;
+use App\Mail\NewAccountInformation;
 
 class RegistrationController extends Controller
 {
@@ -44,10 +48,10 @@ class RegistrationController extends Controller
       ->withErrors($validator);
     } else {
 
-      $usernameLength = 6;
-      $passwordStrength = "4"; // Set to 1, 2, 4 or 8.
-      $passwordLength = "6"; // Set between 1 and 20.
-      $accountLifetime = 60; // Days account is allowed to be active
+      $usernameLength   = Configuration::where('parameter', 'usernamelength')->value('value');
+      $passwordStrength = Configuration::where('parameter', 'passwordstrength')->value('value');; // Set to 1, 2, 4 or 8.
+      $passwordLength   = Configuration::where('parameter', 'passwordlength')->value('value');; // Set between 1 and 20.
+      $accountLifetime  = Configuration::where('parameter', 'accountlifetime')->value('value');; // Days account is allowed to be active
 
       $username = randomStringGen($usernameLength, "0");
       $password = randomStringGen($passwordLength, $passwordStrength);
@@ -75,6 +79,24 @@ class RegistrationController extends Controller
       $transferUser->tb_uuid          = $newUuid;
       $transferUser->save();
 
+      $emailData = array();
+      $emailData['ftp_username']              = $username;
+      $emailData['ftp_password']              = $password;
+      $emailData['tb_title']                  = Input::get('title');
+      $emailData['tb_expdate']                = $expireDate;
+      $emailData['tb_uuid']                   = $newUuid;
+      $emailData['tmpl_systemftphostname']    = Configuration::where('parameter', 'systemftphostname')->value('value');
+      $emailData['tmpl_emailtemplatetitle']   = Configuration::where('parameter', 'emailtemplatetitle')->value('value');
+      $emailData['tmpl_emailpoweredby']       = Configuration::where('parameter', 'emailpoweredby')->value('value');
+      $emailData['tmpl_emailpoweredbylink']   = Configuration::where('parameter', 'emailpoweredbylink')->value('value');
+
+      $emailConfig['emailfrom']                         = Configuration::where('parameter', 'emailfrom')->value('value');
+      $emailConfig['emailfromaddress']                  = Configuration::where('parameter', 'emailfromaddress')->value('value');
+      $emailConfig['emailsubjectnewaccount']            = Configuration::where('parameter', 'emailsubjectnewaccount')->value('value');
+      $emailConfig['emailsubjectnewaccountinformation'] = Configuration::where('parameter', 'emailsubjectnewaccountinformation')->value('value');
+
+      Mail::to(Input::get('email'))->send(new NewAccount($emailData, $emailConfig));
+      Mail::to(Input::get('email'))->send(new NewAccountInformation($emailData, $emailConfig));
       Session::flash('email', Input::get('email'));
       return Redirect::to('registration_success');
     }

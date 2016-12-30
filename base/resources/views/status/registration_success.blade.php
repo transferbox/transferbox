@@ -68,7 +68,7 @@
         <div class="flex-center position-ref full-height">
             <div class="content">
                 <div class="title m-b-md">
-                    The registration was successful. <br \>An email have been sent to {{ session('email') }}
+                    The registration was successful. <br \>An email have been sent to <p>{{ session('email') }}</p>
                 </div>
             </div>
         </div>
