@@ -10,6 +10,7 @@ use View;
 use App\Transferusers;
 use Carbon\Carbon;
 use Session;
+Use File;
 
 class DashboardController extends Controller
 {
@@ -21,7 +22,19 @@ class DashboardController extends Controller
   */
   public function index()
   {
-    return View::make('admin/dashboard');
+
+    $activeAccounts = Transferusers::where('tb_status', 1)->count();
+    if(File::exists("/opt/transferbox/data/")) {
+      $freeSpace = round(disk_free_space("/opt/transferbox/data/") / 1024 / 1024 / 1024);
+    }
+    elseif(File::exists("/ftpdata/")) {
+      $freeSpace = round(disk_free_space("/ftpdata/") / 1024 / 1024 / 1024);
+    }
+    else {
+      $freeSpace = "N/A";
+    }
+
+    return View::make('admin/dashboard', ['activeaccounts' => $activeAccounts, 'freespace' => $freeSpace]);
   }
 
 }
