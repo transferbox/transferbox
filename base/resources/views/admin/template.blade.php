@@ -55,7 +55,10 @@
                             <a href="/admin"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
-                            <a href="/admin/users"><i class="fa fa-table fa-fw"></i> User accounts</a>
+                            <a href="/admin/users"><i class="fa fa-users fa-fw"></i> Active user accounts</a>
+                        </li>
+                        <li>
+                            <a href="/admin/users/listdeactivated"><i class="fa fa-trash-o fa-fw"></i> Deactivated user accounts</a>
                         </li>
                         <li>
                             <a href="/admin/auditlog"><i class="fa fa-table fa-fw"></i> Audit log</a>

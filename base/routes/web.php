@@ -22,10 +22,12 @@ Route::get('/errormessage', function()
 
 Route::get('/account/resend/{userUuid}', 'AccountActionsController@resend');
 Route::get('/account/extend/{userUuid}', 'AccountActionsController@extend');
+Route::get('/account/reactivate/{userUuid}', 'AccountActionsController@reactivate')->middleware('auth');
 Route::get('/account/delete/{userUuid}', 'AccountActionsController@delete');
 
 Route::get('/admin', 'DashboardController@index')->middleware('auth');
 Route::get('/admin/users', 'AdminUsersController@index')->middleware('auth');
+Route::get('/admin/users/listdeactivated', 'AdminUsersController@listdeactivated')->middleware('auth');
 Route::get('/admin/users/view/{userUuid}', 'AdminUsersController@view')->middleware('auth');
 
 Auth::routes();

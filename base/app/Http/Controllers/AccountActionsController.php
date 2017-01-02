@@ -20,9 +20,23 @@ class AccountActionsController extends Controller
     return Redirect::to('errormessage');
   }
 
+  public function reactivate($userUuid)
+  {
+    $transferUser = Transferusers::where('tb_uuid', $userUuid)->get();
+    if($transferUser{0}->tb_status === 0 AND $transferUser{0}->tb_accountdeleted === 0) {
+      $nowDate = Carbon::now();
+
+      $updateUser = Transferusers::where('tb_uuid', $userUuid)->first();
+      $updateUser->tb_expdate = $nowDate->addDays(7);
+      $updateUser->tb_status = 1;
+      $updateUser->save();
+
+      return back();
+    }
+  }
+
   public function extend($userUuid)
   {
-
     $accountRenewalTime = Configuration::where('parameter', 'accountlifetimerenewal')->value('value');
 
     $transferUser = Transferusers::where('tb_uuid', $userUuid)->get();
@@ -70,7 +84,6 @@ class AccountActionsController extends Controller
       Mail::to($transferUser{0}->tb_email)->send(new ExtendAccount($emailData, $emailConfig));
 
       return View::make('status/extention_success', ['expiredate' => $expireDate]);
-
     }
   }
 

@@ -36,7 +36,7 @@ class DashboardController extends Controller
     }
 
     $systemStatus      = Systemstatus::orderby('created_at', 'desc')->first();
-    $systemStatusMore  = Systemstatus::limit(60)->get();
+    $systemStatusMore  = Systemstatus::orderby('created_at', 'desc')->limit(60)->get();
 
     return View::make('admin/dashboard', ['activeaccounts' => $activeAccounts, 'systemstatus' => $systemStatus, 'systemstatusmore' => $systemStatusMore]);
   }
