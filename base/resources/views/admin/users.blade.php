@@ -2,10 +2,10 @@
 
 @section('css')
 <!-- DataTables CSS -->
-<link href="../vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
+<link href="/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
 
 <!-- DataTables Responsive CSS -->
-<link href="../vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
+<link href="/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -25,7 +25,7 @@
               </div>
               <!-- /.panel-heading -->
               <div class="panel-body">
-                  <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                  <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
                       <thead>
                           <tr>
                               <th>Project Title</th>
@@ -63,13 +63,13 @@
 
 @section('scripts')
     <!-- DataTables JavaScript -->
-    <script src="../vendor/datatables/js/jquery.dataTables.min.js"></script>
-    <script src="../vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
-    <script src="../vendor/datatables-responsive/dataTables.responsive.js"></script>
+    <script src="/vendor/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+    <script src="/vendor/datatables-responsive/dataTables.responsive.js"></script>
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script>
     $(document).ready(function() {
-        $('#dataTables-example').DataTable({
+        $('#dataTables').DataTable({
             responsive: true
         });
     });
