@@ -23,7 +23,7 @@ class AccountActionsController extends Controller
   public function reactivate($userUuid)
   {
     $transferUser = Transferusers::where('tb_uuid', $userUuid)->get();
-    if($transferUser{0}->tb_status === 0 AND $transferUser{0}->tb_accountdeleted === 0) {
+    if(intval($transferUser{0}->tb_status) === 0 AND intval($transferUser{0}->tb_accountdeleted) === 0) {
       $nowDate = Carbon::now();
 
       $updateUser = Transferusers::where('tb_uuid', $userUuid)->first();

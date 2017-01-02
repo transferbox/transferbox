@@ -67,7 +67,7 @@
                 <div class="row">
                   <div class="col-lg-12">
                     <div class="form-group">
-                      @if($transferuser{0}->tb_status === 0)
+                      @if(intval($transferuser{0}->tb_status) === 0)
                       <p><a href="/account/reactivate/{{ $userUuid }}"><button type="button" class="btn btn-primary">Reactivate account and add 7 days</button></p>
                       @else
                       <p><a href="/account/resend/{{ $userUuid }}"><button type="button" class="btn btn-primary">Resend information email</button></p>
