@@ -75,6 +75,8 @@ class RegistrationController extends Controller
       $transferUser->tb_comment       = Input::get('comment');
       $transferUser->tb_regdate       = $nowDate;
       $transferUser->tb_expdate       = $expireDate;
+      $transferUser->tb_expmailsent   = 0;
+      $transferUser->tb_accountdeleted = 0;
       $transferUser->tb_status        = 1;
       $transferUser->tb_uuid          = $newUuid;
       $transferUser->save();
