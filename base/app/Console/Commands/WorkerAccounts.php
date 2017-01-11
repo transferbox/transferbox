@@ -7,6 +7,7 @@ use App\Transferusers;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\DeletedAccount;
+use App\Mail\SoonToExpire;
 use App\Configuration;
 
 class WorkerAccounts extends Command
@@ -66,5 +67,27 @@ class WorkerAccounts extends Command
         Mail::to($user->tb_email)->send(new DeletedAccount($emailData, $emailConfig));
       }
       // End of disable expired accounts
+
+      // Start action to send expire soon email
+
+      $nowDate = new Carbon();
+      $notifyDate = $nowDate->addDays(10);
+
+      $transferUser = Transferusers::where('tb_status', 1)->where('tb_expmailsent', '0')->whereDate('tb_expdate', '<=', $nowDate)->get();
+
+      foreach ($transferUser as $user) {
+        $updateUser = Transferusers::where('tb_uuid', $user->tb_uuid)->first();
+        $updateUser->tb_expmailsent = 1;
+        $updateUser->save();
+
+        $emailData['ftp_username']              = $user->ftp_username;
+        $emailData['tb_title']                  = $user->tb_title;
+        $emailData['tb_expdate']                = $user->tb_expdate;
+
+        Mail::to($user->tb_email)->send(new SoonToExpire($emailData, $emailConfig));
+      }
+
+      // End action to send expire soon email
+
     }
 }

@@ -45,6 +45,16 @@
                                 <p class="form-control-static">{{ \Carbon\Carbon::parse($transferuser{0}->tb_expdate)->diffForHumans() }} ({{ $transferuser{0}->tb_expdate }})</p>
                             </div>
                             <div class="form-group">
+                                <label>Soon to expire email sent</label>
+                                <p class="form-control-static">
+                                  @if ($transferuser{0}->tb_expmailsent === 0)
+                                      Not sent
+                                  @else
+                                      Email sent
+                                  @endif
+                                </p>
+                            </div>
+                            <div class="form-group">
                                 <label>FTP Username</label>
                                 <p class="form-control-static">{{ $transferuser{0}->ftp_username }}</p>
                             </div>
