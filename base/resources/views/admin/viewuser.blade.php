@@ -47,7 +47,7 @@
                             <div class="form-group">
                                 <label>Soon to expire email sent</label>
                                 <p class="form-control-static">
-                                  @if ($transferuser{0}->tb_expmailsent === 0)
+                                  @if ($transferuser{0}->tb_expmailsent == 0)
                                       Not sent
                                   @else
                                       Email sent
