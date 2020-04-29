@@ -1,1 +1,25 @@
-/data
+/vendor/
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Laravel & Lumen specific
+public/storage
+public/hot
+
+storage/*.key
+.env
+Homestead.yaml
+Homestead.json
+/.vagrant
+.phpunit.result.cache
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
